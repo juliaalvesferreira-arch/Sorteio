@@ -184,7 +184,7 @@ const FIREBASE_CONFIG = {
   projectId: "sorteio-cf8b7",
   appId: "1:592177422463:web:4a90b704172282b6e65f4a"
 };
-const SITE_URL = "https://www.quintadosesquilos.com.br/sorteio/";
+const SITE_URL = new URL("./", location.href).href; // link do cadastro = pasta onde este painel está hospedado
 const DEMO = !FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey.startsWith("COLE");
 const FB = "https://www.gstatic.com/firebasejs/10.12.2/";
 
