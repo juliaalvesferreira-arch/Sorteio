@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel do sorteio · Quinta dos Esquilos</title>
+<meta name="theme-color" content="#2A1710">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cacau:#3B2217; --cacau-2:#2A1710; --ouro:#C79A5B; --ouro-claro:#E6C896;
+  --areia:#F6F0E7; --fendi:#E9DFD0; --taupe:#A8957F; --salvia:#7C8868; --rosa:#E7B9A6; --grafite:#2E2A27;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Montserrat',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--grafite);background:var(--areia);line-height:1.5;font-size:14px;-webkit-text-size-adjust:100%}
+a{color:var(--cacau)}
+.hide{display:none!important}
+.top{background:linear-gradient(170deg,#4A2C1B,var(--cacau-2));color:var(--areia);padding:14px 20px;display:flex;align-items:center;gap:14px}
+.top img{height:46px;width:auto}
+.top h1{font-family:var(--serif);font-size:24px;font-weight:600;flex:1;line-height:1.1}
+.top h1 small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ouro-claro);font-weight:500}
+.wrap{max-width:900px;margin:0 auto;padding:22px 16px 60px;display:flex;flex-direction:column;gap:18px}
+.card{background:#fff;border:1px solid var(--fendi);border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(59,34,23,.06)}
+h2{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--cacau);line-height:1.1}
+label.l{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cacau);display:block;margin-bottom:5px}
+input[type=text],input[type=email],input[type=password],input[type=date],select{width:100%;font:inherit;font-size:16px;padding:11px 13px;border-radius:12px;border:1.5px solid var(--fendi);background:var(--areia);color:var(--grafite);outline:none}
+input:focus,select:focus{border-color:var(--ouro);box-shadow:0 0 0 3px rgba(199,154,91,.25)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.row>*{flex:1 1 180px}
+.btn{font:inherit;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;background:var(--cacau);color:var(--areia);text-decoration:none;display:inline-block;text-align:center;flex:0 0 auto}
+.btn:hover{background:#56331f}
+.btn.ghost{background:transparent;color:var(--cacau);border:1.5px solid var(--cacau)}
+.btn.ghost:hover{background:var(--cacau);color:var(--areia)}
+.btn.gold{background:var(--ouro);color:var(--cacau-2)}
+.btn.gold:hover{background:var(--ouro-claro)}
+.btn.sm{padding:7px 12px;font-size:11px}
+.btn.danger{background:transparent;color:#9b2f2f;border:1.5px solid #d9b8b8}
+.btn.danger:hover{background:#9b2f2f;color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.chip{display:inline-block;border-radius:999px;padding:4px 12px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.chip.open{background:#e3ead8;color:#47562f}
+.chip.closed{background:var(--fendi);color:var(--cacau)}
+.chip.published{background:var(--cacau);color:var(--ouro-claro)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:var(--areia);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:32px;color:var(--cacau);line-height:1}
+.stat span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a6e64}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.opt{display:flex;gap:8px;align-items:center;font-size:13px;color:#5b514a}
+.opt input{accent-color:var(--cacau);width:18px;height:18px}
+.plist{display:flex;flex-direction:column;gap:8px}
+.p{display:flex;gap:12px;align-items:center;border:1px solid var(--fendi);border-radius:14px;padding:10px 12px;background:#fff}
+.p.win{border-color:var(--ouro);background:#fbf4e8}
+.p.skip{opacity:.55}
+.p .tg{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#7a6e64;cursor:pointer;flex:none;width:62px;text-align:center}
+.p .tg input{width:22px;height:22px;accent-color:var(--salvia)}
+.p .pi{flex:1;min-width:0}
+.p .pi b{color:var(--cacau)}
+.meta{font-size:12.5px;color:#6d625a;word-break:break-word}
+.tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:2px 8px;margin-left:6px;background:var(--ouro);color:var(--cacau-2)}
+.empty{text-align:center;color:#8a7e73;padding:26px 10px}
+.demo{background:#fff3cd;color:#6b5400;font-size:12px;text-align:center;padding:6px 10px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--cacau-2);color:var(--areia);padding:12px 20px;border-radius:999px;font-size:13px;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:90vw;text-align:center}
+.login{max-width:400px;margin:60px auto;padding:0 16px}
+.err{color:#9b2f2f;font-size:13px;min-height:18px;margin-top:8px}
+
+/* overlay */
+.ov{position:fixed;inset:0;z-index:50;background:radial-gradient(120% 80% at 50% 0%,rgba(199,154,91,.28),transparent 60%),linear-gradient(170deg,#4A2C1B,var(--cacau-2));color:var(--areia);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;overflow:hidden}
+.ov .eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--ouro-claro)}
+.ov .big{font-family:var(--serif);font-weight:600;font-size:clamp(38px,9vw,76px);line-height:1.05;margin:16px 0 6px;min-height:1.1em;max-width:900px}
+.ov .ig{font-size:18px;color:var(--ouro-claro);font-weight:600;min-height:1.5em}
+.ov .btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+.ov .btn:not(.ghost):not(.gold){background:var(--areia);color:var(--cacau)}
+.ov .btn:not(.ghost):not(.gold):hover{background:var(--fendi)}
+.ov .btn.ghost{color:var(--areia);border-color:var(--ouro-claro)}
+.ov .btn.ghost:hover{background:var(--areia);color:var(--cacau)}
+.ov img.lg{width:130px;margin-bottom:10px;opacity:.95}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;opacity:.9;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.modal{position:fixed;inset:0;background:rgba(42,23,16,.6);z-index:80;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal .box{background:#fff;border-radius:20px;padding:22px;max-width:380px;width:100%}
+.modal .box p{margin-bottom:16px}
+.modal .box .actions{justify-content:flex-end}
+@media(max-width:520px){.top h1{font-size:20px}.p{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div id="demoBar" class="demo hide">Modo demonstração · dados fictícios só neste navegador. Configure o Firebase para usar de verdade.</div>
+
+<div class="top">
+  <img src="img/logo-dourado.png" alt="Quinta dos Esquilos">
+  <h1><small>Painel</small>Sorteio por evento</h1>
+  <button class="btn ghost sm hide" id="logout" style="color:var(--areia);border-color:var(--ouro-claro)">Sair</button>
+</div>
+
+<!-- Login -->
+<div class="login hide" id="loginView">
+  <div class="card">
+    <h2>Entrar</h2>
+    <form id="loginForm" style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+      <div><label class="l" for="em">E-mail</label><input id="em" type="email" autocomplete="username" required></div>
+      <div><label class="l" for="pw">Senha</label><input id="pw" type="password" autocomplete="current-password" required></div>
+      <button class="btn" type="submit">Entrar</button>
+      <div class="err" id="loginErr"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Painel -->
+<div class="wrap hide" id="app">
+
+  <div class="card">
+    <div class="row">
+      <div><label class="l" for="rsel">Sorteio (por evento)</label><select id="rsel"></select></div>
+      <button class="btn gold" id="newBtn" type="button">+ Novo sorteio</button>
+    </div>
+    <form id="newForm" class="hide" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--fendi)">
+      <div class="row">
+        <div><label class="l" for="nDate">Data do evento</label><input id="nDate" type="date" required></div>
+        <div style="flex:2 1 260px"><label class="l" for="nPrize">Prêmio</label><input id="nPrize" type="text" value="Copo térmico Quinta dos Esquilos"></div>
+        <button class="btn" type="submit">Criar</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="rEmpty" class="card empty hide">Nenhum sorteio ainda. Clique em <b>+ Novo sorteio</b> quando houver um evento com sorteio.</div>
+
+  <div id="rView" class="hide" style="display:flex;flex-direction:column;gap:18px">
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <h2 id="rTitle" style="flex:1"></h2><span class="chip" id="rChip"></span>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="sTot">0</b><span>Cadastros</span></div>
+        <div class="stat"><b id="sChk">0</b><span>Stories conferidos</span></div>
+        <div class="stat"><b id="sPool">0</b><span>Concorrendo</span></div>
+      </div>
+      <label class="opt"><input type="checkbox" id="optAll"> Incluir no sorteio quem ainda não teve o story conferido</label>
+      <div class="actions">
+        <button class="btn" id="drawBtn" type="button">🎲 Sortear</button>
+        <button class="btn ghost" id="statusBtn" type="button"></button>
+        <button class="btn ghost" id="csvBtn" type="button">Exportar CSV</button>
+        <button class="btn ghost" id="linkBtn" type="button">Copiar link do cadastro</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="margin-bottom:12px"><div><label class="l" for="q">Buscar</label><input id="q" type="text" placeholder="Nome, @instagram ou celular"></div>
+        <button class="btn ghost sm" id="markAll" type="button" style="flex:0 0 auto">Marcar todos como conferidos</button></div>
+      <div class="plist" id="plist"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Sorteio -->
+<div class="ov hide" id="ov">
+  <img class="lg" src="img/logo-dourado.png" alt="">
+  <div class="eyebrow" id="ovEye">Sorteando…</div>
+  <div class="big" id="ovName"></div>
+  <div class="ig" id="ovIg"></div>
+  <div class="btns hide" id="ovBtns">
+    <a class="btn gold" id="ovWa" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    <button class="btn" id="ovPub" type="button">Divulgar vencedor no site</button>
+    <button class="btn ghost" id="ovRedo" type="button">Sortear de novo</button>
+    <button class="btn ghost" id="ovClose" type="button">Fechar</button>
+  </div>
+  <div class="confetti" id="confetti"></div>
+</div>
+
+<div class="modal hide" id="modal"><div class="box"><p id="mMsg"></p><div class="actions"><button class="btn ghost sm" id="mNo" type="button">Cancelar</button><button class="btn sm" id="mYes" type="button">Confirmar</button></div></div></div>
+<div class="toast hide" id="toast"></div>
+
+<script type="module">
+/* =========================================================
+   CONFIGURAÇÃO — mesma do index.html (Firebase do projeto quinta-dos-esquilos)
+   ========================================================= */
+const FIREBASE_CONFIG = {
+  apiKey: "COLE_AQUI_A_API_KEY",
+  authDomain: "quinta-dos-esquilos.firebaseapp.com",
+  projectId: "quinta-dos-esquilos",
+  appId: "COLE_AQUI_O_APP_ID"
+};
+const SITE_URL = "https://www.quintadosesquilos.com.br/sorteio/";
+const DEMO = !FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey.startsWith("COLE");
+const FB = "https://www.gstatic.com/firebasejs/10.12.2/";
+
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,"0");
+const todayStr = () => { const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; };
+const fmtDate = s => { const [y,m,d]=s.split("-"); return `${d}/${m}/${y}`; };
+const fmtPhone = p => p.length===11 ? `(${p.slice(0,2)}) ${p.slice(2,7)}-${p.slice(7)}` : `(${p.slice(0,2)}) ${p.slice(2,6)}-${p.slice(6)}`;
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ms = v => !v ? 0 : typeof v==="number" ? v : v.toMillis ? v.toMillis() : 0;
+const fmtTime = v => { const t=ms(v); if(!t) return ""; const d=new Date(t); return `${pad(d.getDate())}/${pad(d.getMonth()+1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+const show=(s,on=true)=>$(s).classList.toggle("hide",!on);
+const mem={}; const store={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}};
+let toastT; function toast(m){ const t=$("#toast"); t.textContent=m; show("#toast"); clearTimeout(toastT); toastT=setTimeout(()=>show("#toast",false),3200); }
+function ask(msg){ return new Promise(res=>{ $("#mMsg").textContent=msg; show("#modal"); const done=v=>{show("#modal",false);res(v)}; $("#mYes").onclick=()=>done(true); $("#mNo").onclick=()=>done(false); }); }
+function rnd(n){ const a=new Uint32Array(1), lim=Math.floor(4294967296/n)*n; do{crypto.getRandomValues(a)}while(a[0]>=lim); return a[0]%n; }
+
+/* ---------- camada de dados ---------- */
+async function makeApi(){
+  if(DEMO){
+    const KEY="qe_demo_v1";
+    const rd=()=>{try{return JSON.parse(store.get(KEY)||"null")}catch(e){return null}};
+    let st=rd();
+    if(!st){ st={raffles:{},participants:{}}; }
+    const tid=todayStr();
+    if(!st.raffles[tid]) st.raffles[tid]={id:tid,date:tid,prize:"Copo térmico Quinta dos Esquilos",status:"open"};
+    if(Object.keys(st.participants[tid]||{}).length<3){
+      const id=tid;
+      const nomes=["Ana Paula Souza","Bruno Carvalho","Camila Ferreira","Diego Martins","Elaine Ribeiro","Fábio Nogueira","Gabriela Lima","Henrique Alves","Isabela Costa","João Pedro Santos","Karina Mendes","Lucas Oliveira"];
+      st.participants[id]=st.participants[id]||{};
+      nomes.forEach((n,i)=>{ const ph="119"+String(80000000+i*137).slice(0,8); st.participants[id][ph]={name:n,phone:ph,instagram:n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").split(" ")[0].toLowerCase()+"_"+(i+10),eventDate:id,createdAt:Date.now()-i*420000,storyChecked:i%3!==2}; });
+      store.set(KEY,JSON.stringify(st));
+    }
+    const sv=()=>store.set(KEY,JSON.stringify(st));
+    const fresh=()=>{st=rd()||st};
+    return {
+      onAuth(cb){ cb({email:"demo"}); }, async login(){}, async logout(){},
+      async listRaffles(){ fresh(); return Object.values(st.raffles); },
+      async createRaffle(r){ fresh(); if(st.raffles[r.id]) return false; st.raffles[r.id]=r; st.participants[r.id]={}; sv(); return true; },
+      async updateRaffle(id,p){ fresh(); Object.assign(st.raffles[id],p); sv(); },
+      async listParticipants(id){ fresh(); return Object.values(st.participants[id]||{}); },
+      async updateParticipant(id,ph,p){ fresh(); Object.assign(st.participants[id][ph],p); sv(); },
+      async deleteParticipant(id,ph){ fresh(); delete st.participants[id][ph]; sv(); }
+    };
+  }
+  const [{initializeApp},fs,au]=await Promise.all([import(FB+"firebase-app.js"),import(FB+"firebase-firestore.js"),import(FB+"firebase-auth.js")]);
+  const app=initializeApp(FIREBASE_CONFIG), db=fs.getFirestore(app), auth=au.getAuth(app);
+  return {
+    onAuth(cb){ au.onAuthStateChanged(auth,cb); },
+    login:(e,p)=>au.signInWithEmailAndPassword(auth,e,p),
+    logout:()=>au.signOut(auth),
+    async listRaffles(){ const s=await fs.getDocs(fs.collection(db,"raffles")); return s.docs.map(d=>({id:d.id,...d.data()})); },
+    async createRaffle(r){ const ref=fs.doc(db,"raffles",r.id); if((await fs.getDoc(ref)).exists()) return false; await fs.setDoc(ref,{date:r.date,prize:r.prize,status:"open",winner:null,createdAt:fs.serverTimestamp()}); return true; },
+    updateRaffle:(id,p)=>fs.updateDoc(fs.doc(db,"raffles",id),p),
+    async listParticipants(id){ const s=await fs.getDocs(fs.collection(db,"raffles",id,"participants")); return s.docs.map(d=>({id:d.id,...d.data()})); },
+    updateParticipant:(id,ph,p)=>fs.updateDoc(fs.doc(db,"raffles",id,"participants",ph),p),
+    deleteParticipant:(id,ph)=>fs.deleteDoc(fs.doc(db,"raffles",id,"participants",ph))
+  };
+}
+
+/* ---------- estado ---------- */
+let api, raffles=[], cur=null, parts=[], poll;
+const curRaffle=()=>raffles.find(r=>r.id===cur);
+const pool=()=>parts.filter(p=>!p.skipped&&($("#optAll").checked||p.storyChecked));
+
+async function boot(){
+  if(DEMO) show("#demoBar");
+  try{ api=await makeApi(); }catch(e){ console.error(e); toast("Erro ao carregar o Firebase."); return; }
+  api.onAuth(u=>{
+    if(u){ show("#loginView",false); show("#app"); show("#logout",!DEMO); loadRaffles(); }
+    else { show("#app",false); show("#logout",false); show("#loginView"); clearInterval(poll); }
+  });
+}
+
+$("#loginForm").addEventListener("submit",async e=>{
+  e.preventDefault(); $("#loginErr").textContent="";
+  try{ await api.login($("#em").value.trim(),$("#pw").value); }
+  catch(err){ $("#loginErr").textContent="E-mail ou senha incorretos."; }
+});
+$("#logout").onclick=()=>api.logout();
+
+async function loadRaffles(keep){
+  raffles=(await api.listRaffles()).sort((a,b)=>a.date<b.date?1:-1);
+  const sel=$("#rsel");
+  sel.innerHTML=raffles.map(r=>`<option value="${esc(r.id)}">${fmtDate(r.date)}${r.status==="open"?" · aberto":r.status==="published"?" · divulgado":" · encerrado"}</option>`).join("");
+  if(!raffles.length){ cur=null; show("#rEmpty"); show("#rView",false); return; }
+  cur = keep && raffles.some(r=>r.id===keep) ? keep : (raffles.find(r=>r.status==="open")||raffles[0]).id;
+  sel.value=cur; show("#rEmpty",false); show("#rView");
+  await loadParts();
+  clearInterval(poll); poll=setInterval(()=>{ if($("#ov").classList.contains("hide")&&document.activeElement!==$("#q")) loadParts(); },15000);
+}
+
+async function loadParts(){
+  if(!cur) return;
+  parts=(await api.listParticipants(cur)).sort((a,b)=>ms(b.createdAt)-ms(a.createdAt));
+  render();
+}
+
+function render(){
+  const r=curRaffle(); if(!r) return;
+  $("#rTitle").textContent="Evento de "+fmtDate(r.date);
+  const ch=$("#rChip"); ch.className="chip "+r.status; ch.textContent=r.status==="open"?"Cadastros abertos":r.status==="closed"?"Cadastros encerrados":"Vencedor divulgado";
+  $("#sTot").textContent=parts.length;
+  $("#sChk").textContent=parts.filter(p=>p.storyChecked).length;
+  $("#sPool").textContent=pool().length;
+  $("#statusBtn").textContent=r.status==="open"?"Encerrar cadastros":r.status==="closed"?"Reabrir cadastros":"Despublicar vencedor";
+  const q=$("#q").value.trim().toLowerCase().replace(/^@/,"");
+  const list=parts.filter(p=>!q||[p.name,p.instagram,p.phone].join(" ").toLowerCase().includes(q));
+  $("#plist").innerHTML=list.length?list.map(p=>`
+    <div class="p ${p.winner?"win":""} ${p.skipped?"skip":""}" data-ph="${esc(p.phone)}">
+      <label class="tg"><input type="checkbox" data-act="chk" ${p.storyChecked?"checked":""}><span>Story<br>conferido</span></label>
+      <div class="pi"><b>${esc(p.name)}</b>${p.winner?'<span class="tag">Sorteado</span>':""}${p.skipped?'<span class="tag" style="background:var(--fendi)">Descartado</span>':""}
+        <div class="meta"><a href="https://www.instagram.com/${esc(p.instagram)}" target="_blank" rel="noopener">@${esc(p.instagram)}</a> · <a href="https://wa.me/55${esc(p.phone)}" target="_blank" rel="noopener">${fmtPhone(p.phone)}</a> · ${fmtTime(p.createdAt)}</div></div>
+      <button class="btn danger sm" data-act="del" type="button">Excluir</button>
+    </div>`).join(""):`<div class="empty">${parts.length?"Nenhum resultado para a busca.":"Ainda ninguém se cadastrou neste sorteio."}</div>`;
+}
+
+/* ---------- ações ---------- */
+$("#rsel").onchange=async e=>{ cur=e.target.value; await loadParts(); };
+$("#q").addEventListener("input",render);
+$("#optAll").addEventListener("change",render);
+$("#newBtn").onclick=()=>{ $("#nDate").value=todayStr(); $("#newForm").classList.toggle("hide"); };
+$("#newForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const date=$("#nDate").value; if(!date) return;
+  const ok=await api.createRaffle({id:date,date,prize:$("#nPrize").value.trim()||"Copo térmico Quinta dos Esquilos"});
+  show("#newForm",false);
+  toast(ok?"Sorteio criado! O cadastro já está aberto.":"Já existe um sorteio nessa data.");
+  await loadRaffles(date);
+});
+
+$("#statusBtn").onclick=async()=>{
+  const r=curRaffle();
+  if(r.status==="open"){ if(!await ask("Encerrar os cadastros? Ninguém mais conseguirá se inscrever neste sorteio.")) return; await api.updateRaffle(cur,{status:"closed"}); }
+  else if(r.status==="closed"){ await api.updateRaffle(cur,{status:"open"}); }
+  else { if(!await ask("Tirar o vencedor do site?")) return; await api.updateRaffle(cur,{status:"closed",winner:null}); }
+  await loadRaffles(cur);
+};
+
+$("#plist").addEventListener("click",async e=>{
+  const row=e.target.closest(".p"); if(!row) return;
+  const ph=row.dataset.ph, act=e.target.dataset.act;
+  if(act==="chk"){
+    const v=e.target.checked; await api.updateParticipant(cur,ph,{storyChecked:v});
+    const p=parts.find(x=>x.phone===ph); if(p) p.storyChecked=v; render();
+  } else if(act==="del"){
+    const p=parts.find(x=>x.phone===ph);
+    if(!await ask(`Excluir ${p.name} do sorteio?`)) return;
+    await api.deleteParticipant(cur,ph); await loadParts(); toast("Participante excluído.");
+  }
+});
+
+$("#markAll").onclick=async()=>{
+  const todo=parts.filter(p=>!p.storyChecked); if(!todo.length) return toast("Todos já estão conferidos.");
+  if(!await ask(`Marcar ${todo.length} participante(s) como story conferido?`)) return;
+  for(const p of todo) await api.updateParticipant(cur,p.phone,{storyChecked:true});
+  await loadParts();
+};
+
+$("#linkBtn").onclick=async()=>{ try{ await navigator.clipboard.writeText(SITE_URL); toast("Link copiado: "+SITE_URL); }catch(e){ toast(SITE_URL); } };
+
+$("#csvBtn").onclick=()=>{
+  const r=curRaffle();
+  const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  const rows=[["Nome","Celular","Instagram","Data do evento","Story conferido","Sorteado","Cadastro"].map(q).join(";")]
+    .concat(parts.map(p=>[p.name,fmtPhone(p.phone),"@"+p.instagram,fmtDate(p.eventDate||r.date),p.storyChecked?"sim":"não",p.winner?"sim":"",fmtTime(p.createdAt)].map(q).join(";")));
+  const blob=new Blob(["﻿"+rows.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`sorteio-${r.date}.csv`; document.body.appendChild(a); a.click(); a.remove();
+  toast("Planilha gerada.");
+};
+
+/* ---------- sorteio ---------- */
+let winner=null;
+function confetti(){
+  const c=$("#confetti"); c.innerHTML="";
+  const cols=["#C79A5B","#E6C896","#E7B9A6","#7C8868","#F6F0E7"];
+  for(let i=0;i<70;i++){ const s=document.createElement("i"); s.style.left=Math.random()*100+"%"; s.style.background=cols[i%cols.length]; s.style.animationDuration=(2.5+Math.random()*2.5)+"s"; s.style.animationDelay=Math.random()*.8+"s"; s.style.transform=`rotate(${Math.random()*360}deg)`; c.appendChild(s); }
+}
+async function runDraw(){
+  const eligible=pool();
+  if(!eligible.length){ toast($("#optAll").checked?"Não há participantes.":"Ninguém com story conferido. Confira os stories ou inclua os não conferidos."); return; }
+  const r=curRaffle();
+  if(r.status==="open" && !await ask("Os cadastros ainda estão abertos. Sortear mesmo assim?")) return;
+  $("#ov").classList.remove("hide"); show("#ovBtns",false); $("#confetti").innerHTML=""; $("#ovIg").textContent="";
+  $("#ovEye").textContent="Sorteando…";
+  winner=eligible[rnd(eligible.length)];
+  const total=eligible.length>1?36:1; let i=0;
+  await new Promise(res=>{ (function tick(){
+    $("#ovName").textContent=eligible[rnd(eligible.length)].name;
+    i++; if(i>=total) return res();
+    setTimeout(tick,60+Math.pow(i/total,3)*420);
+  })(); });
+  $("#ovName").textContent=winner.name;
+  $("#ovIg").textContent="@"+winner.instagram+" · "+fmtPhone(winner.phone);
+  $("#ovEye").textContent="Parabéns!";
+  const first=winner.name.split(" ")[0];
+  $("#ovWa").href=`https://wa.me/55${winner.phone}?text=`+encodeURIComponent(`Oi, ${first}! Você ganhou o sorteio do copo térmico da Quinta dos Esquilos 🎉 Vamos combinar a entrega?`);
+  show("#ovBtns"); confetti();
+  // grava o resultado (só o painel enxerga até divulgar)
+  for(const p of parts.filter(p=>p.winner&&p.phone!==winner.phone)) await api.updateParticipant(cur,p.phone,{winner:false});
+  await api.updateParticipant(cur,winner.phone,{winner:true,skipped:false});
+  await loadParts();
+}
+$("#drawBtn").onclick=runDraw;
+$("#ovRedo").onclick=async()=>{
+  if(!await ask(`Descartar ${winner.name} e sortear outra pessoa?`)) return;
+  await api.updateParticipant(cur,winner.phone,{winner:false,skipped:true}); await loadParts(); runDraw();
+};
+$("#ovClose").onclick=()=>show("#ov",false);
+$("#ovPub").onclick=async()=>{
+  const nm=winner.name.split(" "); const pub=nm.length>1?`${nm[0]} ${nm[nm.length-1][0]}.`:nm[0];
+  await api.updateRaffle(cur,{status:"published",winner:{name:pub,instagram:winner.instagram}});
+  show("#ov",false); toast(`Vencedor divulgado no site: ${pub} (@${winner.instagram})`); await loadRaffles(cur);
+};
+
+boot();
+</script>
+</body>
+</html>

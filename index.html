@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorteio · Quinta dos Esquilos</title>
+<meta name="description" content="Participe do sorteio de um copo térmico Quinta dos Esquilos. Cadastre-se, poste nos stories e concorra!">
+<meta name="theme-color" content="#2A1710">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cacau:#3B2217; --cacau-2:#2A1710; --ouro:#C79A5B; --ouro-claro:#E6C896;
+  --areia:#F6F0E7; --fendi:#E9DFD0; --taupe:#A8957F; --salvia:#7C8868; --rosa:#E7B9A6; --grafite:#2E2A27;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Montserrat',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--grafite);background:var(--areia);line-height:1.55;font-size:15px}
+a{color:inherit}
+.page{display:grid;grid-template-columns:1fr;min-height:100vh}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:
+  radial-gradient(120% 80% at 50% 0%,rgba(199,154,91,.28),transparent 60%),
+  linear-gradient(170deg,#4A2C1B 0%,var(--cacau-2) 70%);
+  color:var(--areia);padding:34px 24px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden}
+.hero .logo{width:min(230px,58vw);height:auto;display:block}
+.eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--ouro-claro);margin-top:26px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,8vw,48px);line-height:1.05;margin:10px 0 24px}
+.hero h1 em{font-style:italic;color:var(--ouro-claro);font-weight:500}
+.cup{position:relative;width:min(300px,68vw)}
+.cup::before{content:"";position:absolute;inset:-8px;border:1px solid rgba(230,200,150,.45);border-radius:30px}
+.cup img{display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.cup-cap{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ouro-claro);margin-top:22px}
+
+/* ---------- Conteúdo ---------- */
+.content{padding:34px 20px 48px;display:flex;flex-direction:column;gap:22px;max-width:640px;width:100%;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--fendi);color:var(--cacau);border-radius:999px;padding:7px 16px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;align-self:flex-start}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--salvia);display:block}
+h2{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--cacau);line-height:1.1}
+.lead{color:#5b514a}
+.steps{list-style:none;display:flex;flex-direction:column;gap:12px}
+.steps li{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--fendi);border-radius:18px;padding:16px 16px}
+.steps .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--cacau);color:var(--ouro-claro);font-family:var(--serif);font-size:20px;font-weight:700;display:grid;place-items:center}
+.steps b{color:var(--cacau)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;text-decoration:none;background:var(--areia);border:1px solid var(--taupe);color:var(--cacau);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
+.chip:hover{background:var(--cacau);color:var(--areia)}
+.chip svg{width:14px;height:14px}
+.small{font-size:12.5px;color:#7a6e64;margin-top:6px}
+
+.card{background:#fff;border:1px solid var(--fendi);border-radius:22px;padding:24px 20px;box-shadow:0 10px 30px rgba(59,34,23,.07)}
+.card h3{font-family:var(--serif);font-size:26px;color:var(--cacau);font-weight:600;margin-bottom:4px}
+form{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cacau);display:block;margin-bottom:6px}
+input[type=text],input[type=tel],select{width:100%;font:inherit;font-size:16px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--fendi);background:var(--areia);color:var(--grafite);outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{border-color:var(--ouro);box-shadow:0 0 0 3px rgba(199,154,91,.25)}
+select:disabled{opacity:1;color:var(--grafite);-webkit-text-fill-color:var(--grafite);background:var(--fendi)}
+.at{position:relative}
+.at span{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--taupe);font-size:16px;pointer-events:none}
+.at input{padding-left:32px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5b514a;text-transform:none;letter-spacing:0;font-weight:400;cursor:pointer;margin:0}
+.check input{margin-top:3px;accent-color:var(--cacau);width:18px;height:18px;flex:none}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+.btn{font:inherit;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;border:0;border-radius:999px;padding:16px 26px;cursor:pointer;background:var(--cacau);color:var(--areia);transition:background .15s,transform .05s;text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{background:#56331f}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.55;cursor:wait}
+.btn.ghost{background:transparent;color:var(--cacau);border:1.5px solid var(--cacau)}
+.btn.ghost:hover{background:var(--cacau);color:var(--areia)}
+.err{color:#9b2f2f;font-size:13px;min-height:18px}
+.ok{text-align:center}
+.ok .tick{width:58px;height:58px;border-radius:50%;background:var(--salvia);color:#fff;display:grid;place-items:center;margin:0 auto 12px;font-size:28px}
+.ok p{margin:8px 0}
+.ok .btns{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.winner{background:linear-gradient(160deg,var(--cacau),var(--cacau-2));color:var(--areia);text-align:center;border:0}
+.winner h3{color:var(--ouro-claro)}
+.winner .nm{font-family:var(--serif);font-size:34px;font-weight:600;margin:6px 0 2px}
+.winner .ig{color:var(--ouro-claro);font-weight:600}
+.foot{text-align:center;color:#8a7e73;font-size:12px;margin-top:6px}
+.foot a{color:var(--cacau)}
+.hide{display:none!important}
+.skeleton{height:120px;border-radius:22px;background:linear-gradient(90deg,var(--fendi),#f3ebdf,var(--fendi));background-size:200% 100%;animation:sh 1.4s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.demo{background:#fff3cd;color:#6b5400;font-size:12px;text-align:center;padding:6px 10px}
+
+@media(min-width:960px){
+  .page{grid-template-columns:minmax(400px,44%) 1fr}
+  .hero{position:sticky;top:0;height:100vh;justify-content:center;padding:40px}
+  .content{padding:56px 48px;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div id="demoBar" class="demo hide">Modo demonstração · os dados ficam só neste navegador. Configure o Firebase para publicar.</div>
+<div class="page">
+
+  <header class="hero">
+    <img class="logo" src="img/logo-dourado.png" alt="Quinta dos Esquilos · Espaço de Eventos">
+    <div class="eyebrow">Sorteio</div>
+    <h1>Concorra a um <em>copo térmico</em> exclusivo</h1>
+    <div class="cup"><img src="img/copo-escuro.jpg" alt="Copo térmico preto com a marca Quinta dos Esquilos gravada"></div>
+    <div class="cup-cap">Copo térmico Quinta dos Esquilos</div>
+  </header>
+
+  <main class="content">
+    <div id="state-loading" class="skeleton"></div>
+
+    <section id="winnerBox" class="card winner hide">
+      <div class="eyebrow" style="margin-top:0">Último sorteio</div>
+      <h3>Temos um(a) vencedor(a)!</h3>
+      <div class="nm" id="wName"></div>
+      <div class="ig" id="wIg"></div>
+      <p class="small" style="color:var(--ouro-claro)" id="wDate"></p>
+    </section>
+
+    <section id="state-none" class="hide">
+      <span class="badge"><i style="background:var(--taupe)"></i>Sem sorteio no momento</span>
+      <h2 style="margin-top:14px">Não há sorteio ativo hoje</h2>
+      <p class="lead" style="margin-top:8px">Fazemos um sorteio por evento, mas nem todo dia tem. Acompanhe o nosso Instagram para saber quando o próximo vai acontecer.</p>
+      <div class="chips"><a class="chip" href="https://www.instagram.com/quintadosesquilos" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@quintadosesquilos</a></div>
+    </section>
+
+    <section id="state-open" class="hide" style="display:flex;flex-direction:column;gap:22px">
+      <div>
+        <span class="badge"><i></i><span id="evBadge">Sorteio aberto</span></span>
+        <h2 style="margin-top:14px">Como participar</h2>
+        <p class="lead" style="margin-top:6px">É rápido: leva menos de 1 minuto.</p>
+      </div>
+
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Cadastre-se</b><br>Preencha o formulário abaixo com seus dados.</div></li>
+        <li><span class="n">2</span><div><b>Poste nos stories</b><br>Publique uma foto ou vídeo do evento nos stories do Instagram e marque os dois perfis:
+          <div class="chips">
+            <a class="chip" href="https://www.instagram.com/quintadosesquilos" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@quintadosesquilos</a>
+            <a class="chip" href="https://www.instagram.com/_bardaquinta" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@_bardaquinta</a>
+          </div>
+          <div class="small">Confira se os dois @ estão escritos certinho para a marcação chegar até nós.</div></div></li>
+        <li><span class="n">3</span><div><b>Aguarde o sorteio</b><br>No final do evento fazemos o sorteio e divulgamos o vencedor aqui e nos nossos stories.</div></li>
+      </ol>
+
+      <div class="card" id="formCard">
+        <h3>Quero participar</h3>
+        <div class="small" style="margin-top:0">Concorra a um copo térmico Quinta dos Esquilos.</div>
+        <form id="form" novalidate autocomplete="on">
+          <div><label for="name">Nome completo</label><input id="name" type="text" autocomplete="name" maxlength="80" placeholder="Seu nome e sobrenome" required></div>
+          <div><label for="phone">Celular (WhatsApp)</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="16" placeholder="(11) 99999-9999" required></div>
+          <div><label for="ig">Seu Instagram</label><div class="at"><span>@</span><input id="ig" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="40" placeholder="seuusuario" required></div></div>
+          <div><label for="eventDate">Data do evento</label><select id="eventDate"></select></div>
+          <div class="hp" aria-hidden="true"><label>Não preencha<input id="site" type="text" tabindex="-1" autocomplete="off"></label></div>
+          <label class="check"><input id="agree" type="checkbox"><span>Vou postar nos stories e marcar <b>@quintadosesquilos</b> e <b>@_bardaquinta</b>. Autorizo o uso dos meus dados apenas para este sorteio e para contato caso eu seja o vencedor.</span></label>
+          <div class="err" id="err" role="alert"></div>
+          <button class="btn" id="submit" type="submit">Participar do sorteio</button>
+        </form>
+      </div>
+
+      <div class="card ok hide" id="okCard">
+        <div class="tick">✓</div>
+        <h3>Cadastro feito!</h3>
+        <p id="okName"></p>
+        <p><b>Falta só um passo:</b> poste uma foto ou vídeo nos stories e marque <b>@quintadosesquilos</b> e <b>@_bardaquinta</b>. Só concorre quem postar.</p>
+        <div class="btns">
+          <a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">Abrir o Instagram</a>
+          <button class="btn ghost" id="again" type="button">Cadastrar outra pessoa</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="foot">Quinta dos Esquilos · Espaço de Eventos · Cotia/SP<br>
+    <a href="https://www.quintadosesquilos.com.br">www.quintadosesquilos.com.br</a></p>
+  </main>
+</div>
+
+<script type="module">
+/* =========================================================
+   CONFIGURAÇÃO — cole aqui os dados do seu app Web do Firebase
+   (Console Firebase > Configurações do projeto > Seus apps).
+   Enquanto apiKey começar com "COLE", a página roda em modo demonstração.
+   ========================================================= */
+const FIREBASE_CONFIG = {
+  apiKey: "COLE_AQUI_A_API_KEY",
+  authDomain: "quinta-dos-esquilos.firebaseapp.com",
+  projectId: "quinta-dos-esquilos",
+  appId: "COLE_AQUI_O_APP_ID"
+};
+const DEMO = !FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey.startsWith("COLE");
+const FB = "https://www.gstatic.com/firebasejs/10.12.2/";
+
+/* ---------- utilitários ---------- */
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,"0");
+const todayStr = (off=0) => { const d=new Date(); d.setDate(d.getDate()+off); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; };
+const fmtDate = s => { const [y,m,d]=s.split("-"); return `${d}/${m}/${y}`; };
+const mem = {};
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return mem[k]||null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){ mem[k]=v; } }
+};
+
+/* ---------- camada de dados ---------- */
+async function makeApi(){
+  if(DEMO){
+    const KEY="qe_demo_v1";
+    const read=()=>{ try{ return JSON.parse(store.get(KEY)||"null"); }catch(e){ return null; } };
+    let st=read();
+    if(!st){ st={raffles:{},participants:{}}; st.raffles[todayStr()]={id:todayStr(),date:todayStr(),prize:"Copo térmico Quinta dos Esquilos",status:"open"}; store.set(KEY,JSON.stringify(st)); }
+    return {
+      async loadRaffles(){ st=read()||st; return Object.values(st.raffles); },
+      async register(rid,p){
+        st=read()||st; const bag=(st.participants[rid]=st.participants[rid]||{});
+        if(bag[p.phone]) throw {code:"permission-denied"};
+        bag[p.phone]={...p,createdAt:Date.now(),storyChecked:false};
+        store.set(KEY,JSON.stringify(st));
+      }
+    };
+  }
+  const [{initializeApp},fs]=await Promise.all([import(FB+"firebase-app.js"),import(FB+"firebase-firestore.js")]);
+  const db=fs.getFirestore(initializeApp(FIREBASE_CONFIG));
+  return {
+    async loadRaffles(){
+      const q=fs.query(fs.collection(db,"raffles"),fs.where("date",">=",todayStr(-14)));
+      const snap=await fs.getDocs(q);
+      return snap.docs.map(d=>({id:d.id,...d.data()}));
+    },
+    async register(rid,p){
+      await fs.setDoc(fs.doc(db,"raffles",rid,"participants",p.phone),{
+        name:p.name,phone:p.phone,instagram:p.instagram,eventDate:p.eventDate,createdAt:fs.serverTimestamp()
+      });
+    }
+  };
+}
+
+/* ---------- estado da página ---------- */
+let api, open=[];
+const show=(id,on=true)=>$(id).classList.toggle("hide",!on);
+
+async function init(){
+  if(DEMO) show("#demoBar");
+  try{
+    api=await makeApi();
+    const all=await api.loadRaffles();
+    open=all.filter(r=>r.status==="open").sort((a,b)=>a.date<b.date?-1:1);
+    const pub=all.filter(r=>r.status==="published"&&r.winner).sort((a,b)=>a.date<b.date?1:-1)[0];
+    show("#state-loading",false);
+    if(pub){
+      $("#wName").textContent=pub.winner.name;
+      $("#wIg").textContent="@"+pub.winner.instagram;
+      $("#wDate").textContent="Evento de "+fmtDate(pub.date)+" · Parabéns!";
+      show("#winnerBox");
+    }
+    if(open.length){ buildForm(); show("#state-open"); $("#state-open").style.display="flex"; }
+    else show("#state-none");
+  }catch(e){
+    console.error(e);
+    show("#state-loading",false); show("#state-none");
+    $("#state-none h2").textContent="Não foi possível carregar";
+  }
+}
+
+function buildForm(){
+  const sel=$("#eventDate");
+  sel.innerHTML=open.map(r=>`<option value="${r.id}">${fmtDate(r.date)}</option>`).join("");
+  sel.disabled=open.length===1;
+  $("#evBadge").textContent=open.length===1?"Sorteio aberto · evento de "+fmtDate(open[0].date):"Sorteios abertos";
+}
+
+/* ---------- máscara e validação ---------- */
+const phoneEl=$("#phone");
+phoneEl.addEventListener("input",()=>{
+  let d=phoneEl.value.replace(/\D/g,"");
+  if(d.length>11&&d.startsWith("55")) d=d.slice(2);
+  d=d.slice(0,11);
+  let o=d;
+  if(d.length>2){
+    const rest=d.slice(2), cut=rest.length>8?5:4;
+    o=`(${d.slice(0,2)}) ${rest.slice(0,cut)}${rest.length>cut?"-"+rest.slice(cut):""}`;
+  } else if(d.length>0) o=`(${d}`;
+  phoneEl.value=o;
+});
+const igEl=$("#ig");
+igEl.addEventListener("input",()=>{ igEl.value=igEl.value.replace(/^.*instagram\.com\//i,"").replace(/^@+/,"").replace(/[?\/\s@].*$/,"").replace(/[^A-Za-z0-9._]/g,""); });
+
+function validate(){
+  const name=$("#name").value.trim().replace(/\s+/g," ");
+  const phone=phoneEl.value.replace(/\D/g,"");
+  const instagram=igEl.value.trim().replace(/^@/,"").toLowerCase();
+  if(name.length<5||!name.includes(" ")) return {error:"Informe seu nome e sobrenome."};
+  if(!/^[1-9][0-9]9?[0-9]{8}$/.test(phone)||phone.length<10) return {error:"Informe um celular válido com DDD."};
+  if(phone.length===11&&phone[2]!=="9") return {error:"Informe um celular válido com DDD."};
+  if(!/^[a-z0-9._]{1,30}$/.test(instagram)) return {error:"Informe seu @ do Instagram (sem espaços)."};
+  if(!$("#agree").checked) return {error:"Marque a caixa confirmando que vai postar nos stories."};
+  const rid=$("#eventDate").value;
+  const r=open.find(x=>x.id===rid);
+  if(!r) return {error:"Escolha a data do evento."};
+  return {rid,data:{name,phone,instagram,eventDate:r.date}};
+}
+
+$("#form").addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  const err=$("#err"); err.textContent="";
+  if($("#site").value) return; // bot
+  const v=validate();
+  if(v.error){ err.textContent=v.error; return; }
+  const btn=$("#submit"); btn.disabled=true; btn.textContent="Enviando…";
+  try{
+    await api.register(v.rid,v.data);
+    store.set("qe_done_"+v.rid,"1");
+    $("#okName").textContent=`Obrigado, ${v.data.name.split(" ")[0]}! Você já está concorrendo.`;
+    show("#formCard",false); show("#okCard"); $("#okCard").scrollIntoView({behavior:"smooth",block:"center"});
+  }catch(e){
+    console.error(e);
+    err.textContent=(e&&e.code==="permission-denied")
+      ? "Este celular já está cadastrado neste sorteio (ou os cadastros foram encerrados)."
+      : "Não foi possível enviar agora. Verifique a internet e tente de novo.";
+  }finally{ btn.disabled=false; btn.textContent="Participar do sorteio"; }
+});
+
+$("#again").addEventListener("click",()=>{
+  $("#form").reset(); $("#err").textContent="";
+  show("#okCard",false); show("#formCard");
+  $("#formCard").scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+init();
+</script>
+</body>
+</html>
