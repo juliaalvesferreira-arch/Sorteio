@@ -30,7 +30,11 @@ label.l{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:upper
 input[type=text],input[type=email],input[type=password],input[type=date],select{width:100%;font:inherit;font-size:16px;padding:11px 13px;border-radius:12px;border:1.5px solid var(--fendi);background:var(--areia);color:var(--grafite);outline:none}
 input:focus,select:focus{border-color:var(--ouro);box-shadow:0 0 0 3px rgba(199,154,91,.25)}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
-.row>*{flex:1 1 180px}
+.row>*{flex:1 1 180px;min-width:0}
+input[type=date]{-webkit-appearance:none;appearance:none;display:block;width:100%;max-width:100%;min-width:0;min-height:48px;text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left}
+#newForm .row{flex-direction:column;align-items:stretch}
+#newForm .row>*{flex:0 0 auto!important;width:100%}
 .btn{font:inherit;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;background:var(--cacau);color:var(--areia);text-decoration:none;display:inline-block;text-align:center;flex:0 0 auto}
 .btn:hover{background:#56331f}
 .btn.ghost{background:transparent;color:var(--cacau);border:1.5px solid var(--cacau)}
@@ -200,6 +204,14 @@ const show=(s,on=true)=>$(s).classList.toggle("hide",!on);
 const mem={}; const store={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}};
 let toastT; function toast(m){ const t=$("#toast"); t.textContent=m; show("#toast"); clearTimeout(toastT); toastT=setTimeout(()=>show("#toast",false),3200); }
 function ask(msg){ return new Promise(res=>{ $("#mMsg").textContent=msg; show("#modal"); const done=v=>{show("#modal",false);res(v)}; $("#mYes").onclick=()=>done(true); $("#mNo").onclick=()=>done(false); }); }
+function fail(err){
+  console.error(err);
+  const c=err&&err.code||"";
+  toast(c==="permission-denied"||c==="firestore/permission-denied"
+    ? "Sem permissão no Firebase. Confira se as regras foram publicadas e se o e-mail nas regras é o mesmo do login."
+    : "Erro: "+(err&&err.message||err));
+}
+window.addEventListener("unhandledrejection",e=>{ fail(e.reason); });
 function rnd(n){ const a=new Uint32Array(1), lim=Math.floor(4294967296/n)*n; do{crypto.getRandomValues(a)}while(a[0]>=lim); return a[0]%n; }
 
 /* ---------- camada de dados ---------- */
@@ -223,7 +235,7 @@ async function makeApi(){
     return {
       onAuth(cb){ cb({email:"demo"}); }, async login(){}, async logout(){},
       async listRaffles(){ fresh(); return Object.values(st.raffles); },
-      async createRaffle(r){ fresh(); if(st.raffles[r.id]) return false; st.raffles[r.id]=r; st.participants[r.id]={}; sv(); return true; },
+      async createRaffle(r){ fresh(); if(st.raffles[r.id]) return false; st.raffles[r.id]={...r,status:"open"}; st.participants[r.id]={}; sv(); return true; },
       async updateRaffle(id,p){ fresh(); Object.assign(st.raffles[id],p); sv(); },
       async listParticipants(id){ fresh(); return Object.values(st.participants[id]||{}); },
       async updateParticipant(id,ph,p){ fresh(); Object.assign(st.participants[id][ph],p); sv(); },
@@ -309,11 +321,15 @@ $("#optAll").addEventListener("change",render);
 $("#newBtn").onclick=()=>{ $("#nDate").value=todayStr(); $("#newForm").classList.toggle("hide"); };
 $("#newForm").addEventListener("submit",async e=>{
   e.preventDefault();
-  const date=$("#nDate").value; if(!date) return;
-  const ok=await api.createRaffle({id:date,date,prize:$("#nPrize").value.trim()||"Copo térmico Quinta dos Esquilos"});
-  show("#newForm",false);
-  toast(ok?"Sorteio criado! O cadastro já está aberto.":"Já existe um sorteio nessa data.");
-  await loadRaffles(date);
+  const date=$("#nDate").value; if(!date){ toast("Escolha a data do evento."); return; }
+  const btn=e.submitter||$("#newForm button[type=submit]"); btn.disabled=true;
+  try{
+    const ok=await api.createRaffle({id:date,date,prize:$("#nPrize").value.trim()||"Copo térmico Quinta dos Esquilos"});
+    show("#newForm",false);
+    toast(ok?"Sorteio criado! O cadastro já está aberto.":"Já existe um sorteio nessa data.");
+    await loadRaffles(date);
+  }catch(err){ fail(err); }
+  finally{ btn.disabled=false; }
 });
 
 $("#statusBtn").onclick=async()=>{
